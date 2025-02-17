@@ -1,1 +1,4 @@
 A compiler is a computer program that translates source code into machine code (that computers can understand and execute.)or another programming language.
+
+Differencr btw ?, ?? , ||
+https://chatgpt.com/share/67b2e00c-29d0-8012-86d9-5f38a65e4a44
