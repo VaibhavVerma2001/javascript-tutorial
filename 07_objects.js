@@ -36,10 +36,10 @@ const obj4 = { 3: "a", 4: "b" };
 const obj5 = { 5: "a", 6: "b" };
 
 const obj6 = Object.assign({}, obj3, obj4, obj5);
-console.log(obj6);
+console.log("obj6 : ", obj6);
 
 const obj7 = { ...obj3, ...obj4, ...obj5 };
-console.log(obj7);
+console.log("obj7 : ", obj7);
 
 // ✅ Both produce the same result in this case.
 // ✅ Yes, both create shallow copies.
@@ -158,3 +158,24 @@ console.log("result : ", result); // [ 'name and Vaibhav', 'age and 23', 'isVali
 // | `Object.values().map()`  | 🔢 Value only | `Array`             | ❌ Manual             |
 // | `Object.entries().map()` | ✅ Both        | `Array`             | ✅ with `fromEntries` |
 // | `for...in` loop          | ✅ Both        | `Array` (if pushed) | ✅                    |
+
+
+
+// Use await - 
+// ❌ What Doesn’t Work
+// Trying await inside a plain .forEach():
+
+Object.entries(user).forEach(async ([key, value]) => {
+  const result = await processValue(value);
+  console.log(result);
+});
+// ⚠️ Doesn’t wait properly because forEach doesn’t respect async
+
+
+// ✅ Correct Approaches
+// 1️⃣ Use for...of (Best for async)
+
+for (const [key, value] of Object.entries(user)) {
+  const result = await processValue(value);
+  console.log(key, result);
+}
