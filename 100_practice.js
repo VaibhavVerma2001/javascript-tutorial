@@ -1,10 +1,10 @@
-const arr = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
+let i = 1;
+setInterval(() => {
+  console.log("Inside set time out async : ", i);
+  i++;
+}, 1000);
 
-const res = arr.map((item) => {
-  const temp = {...item};
-  temp.id = 10;
-  return temp;
-});
-
-console.log(arr);
-console.log(res);
+for (let i = 0; i < 100000; i++) {
+  console.log(i);
+}
+console.log("END");
