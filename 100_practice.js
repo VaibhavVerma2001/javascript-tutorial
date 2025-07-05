@@ -1,10 +1,18 @@
-let i = 1;
-setInterval(() => {
-  console.log("Inside set time out async : ", i);
-  i++;
-}, 1000);
+// async function always return promise
+// await can be used only inside async function
 
-for (let i = 0; i < 100000; i++) {
-  console.log(i);
-}
-console.log("END");
+const p = new Promise((resolve, reject) => {
+  resolve("Promise Resolved");
+});
+
+const getData = () => {
+  p.then((res) => console.log(res));
+};
+getData(); // Promise Resolved
+
+// Using async await
+const asyncGetData = async () => {
+  const res = await p;
+  console.log(res);
+};
+asyncGetData(); // Promise Resolved
