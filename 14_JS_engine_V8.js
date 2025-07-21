@@ -12,6 +12,30 @@
 // | SpiderMonkey   | Firefox         |
 // | JavaScriptCore | Safari          |
 
+// Js is compiled or interpretd?
+// JavaScript is both compiled and interpreted — but not in the traditional way. Here's the modern explanation:
+// 🔹 JavaScript is a Just-In-Time (JIT) Compiled Language (means uses interpreter + compiler to execute the code)
+// Old days:
+// JavaScript was purely interpreted, executed line by line by browsers.
+// Modern engines (like V8, SpiderMonkey, etc.):
+// Use a JIT compiler, meaning JavaScript is:
+// 🔸 Parsed & interpreted quickly at first, then 🔸 compiled into optimized machine code while it's running.
+
+// 🔍 Breakdown of What Happens in V8 (Chrome/Node.js):
+// Parsing: JS code is parsed into an Abstract Syntax Tree (AST).
+// Interpreter: Quick and dirty version of code is executed using an interpreter (Ignition in V8).
+// Profiler: V8 watches for “hot” code (frequently used).
+// JIT Compiler: Hot code is sent to a optimizing compiler (TurboFan) → compiles to native machine code.
+// Deoptimization: If assumptions made during optimization are wrong, it falls back to slower code.
+
+// ⚡️Conclusion:
+// JavaScript is not purely interpreted nor strictly compiled. It is JIT-compiled, making it a hybrid — fast and dynamic.
+
+// 🧠 So Why Not Just Compile Everything Up Front?
+// Because JavaScript is very dynamic:
+// You can add/change variables, functions, or types at runtime.
+// The engine can’t always predict what will happen early on.
+
 // 🚀 What is V8 Engine?
 // V8 is Google's high-performance JavaScript engine, written in C++.
 // Powers Google Chrome and Node.js
@@ -19,24 +43,6 @@
 // Just-In-Time (JIT) compilation
 // Hidden classes and inline caching
 // Garbage collection
-
-// 🔍 V8 Internals – How It Works
-// Parsing:
-// JS code is parsed into an Abstract Syntax Tree (AST)
-// Ignition (Interpreter):
-// Produces bytecode from the AST
-// Starts executing fast
-// TurboFan (JIT Compiler):
-// Optimizes hot (frequently executed) code into machine code
-// Skips unnecessary steps for performance
-
-// example
-const add = (a, b) => a + b;
-console.log(add(2, 3));
-// V8 will:
-// 1) Parse → AST
-// 2) Generate bytecode → Execute
-// 3) Optimize → Machine code (if repeated)
 
 // 🧱 How V8 Works in Node.js
 // Node.js is built on top of the V8 engine, but adds:
@@ -107,3 +113,54 @@ console.log(add(2, 3));
 // | **Async I/O**              | File system, network, DNS, etc.      |
 // | **Thread Pool**            | Runs heavy/blocking tasks in threads |
 // | **Cross-platform Support** | Works on Linux, macOS, Windows       |
+
+// ♻️ What is a Garbage Collector?
+// JavaScript (and many high-level languages) has automatic memory management.
+// When you create variables, objects, or arrays — memory is allocated.
+// When they're no longer needed, the Garbage Collector (GC) reclaims that memory.
+// ✅ You don’t need to manually free memory like in C/C++.
+
+// 🧹 Mark-and-Sweep Algorithm
+// JavaScript engines like V8 (used in Chrome/Node.js) use the Mark-and-Sweep algorithm to clean up memory.
+// 🧠 Key Idea:
+// "If something is not reachable (cannot be accessed), it can be garbage collected."
+
+// 📊 Step-by-Step: Mark-and-Sweep
+// Let’s say you have this code:
+// function demo() {
+//   const user = { name: "Vaibhav" };
+//   const age = 25;
+// }
+// demo();
+// ✅ Step 1: Mark
+// GC starts from a set of roots (like window, global variables, local stack).
+// It follows all references and marks everything that is reachable.
+// [Global / Stack Frame]
+//     ↓
+//   user → { name: "Vaibhav" }
+//   age  → 25
+// Anything that is reachable from the root is marked as in-use.
+
+// ❌ Step 2: Sweep
+// GC then sweeps through all memory.
+// Anything not marked is considered garbage and gets deleted (freed).
+// Unmarked → Deleted (swept away)
+// 🧹 Visual Summary:
+// [Roots]
+//   |
+//   └──> Reachable → Marked ✅
+//               ↓
+//       Unreachable → Swept ❌
+// 📌 Example: Reachability
+// let person = { name: "John" };
+// person = null; // 🚨 original object is now unreachable
+// The { name: "John" } object is no longer referenced → becomes garbage.
+// GC will eventually clean it up in the next cycle.
+
+
+// ✅ Summary
+// | Step        | Description                        |
+// | ----------- | ---------------------------------- |
+// | **Mark**    | Traverse from root, mark reachable |
+// | **Sweep**   | Clean up unmarked (unreachable)    |
+// | **Used by** | JS engines like V8, SpiderMonkey   |
