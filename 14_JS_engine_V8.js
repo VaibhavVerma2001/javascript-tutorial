@@ -164,3 +164,8 @@
 // | **Mark**    | Traverse from root, mark reachable |
 // | **Sweep**   | Clean up unmarked (unreachable)    |
 // | **Used by** | JS engines like V8, SpiderMonkey   |
+
+
+// GC doesn't run in a constant loop.
+// It’s periodically and conditionally triggered based on memory usage.
+// It performs Mark-and-Sweep (and other strategies) as part of that cycle.
