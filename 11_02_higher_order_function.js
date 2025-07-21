@@ -32,6 +32,9 @@ processUserInput(greet);
 // | **Control**    | Calls the callback                      | Gets called by the HOF                        |
 // | **Example**    | `map`, `filter`, `reduce`, `setTimeout` | The function you pass to `map`, `filter` etc. |
 
+// ✅ Yes — it is the responsibility of a Higher-Order Function (HOF) to call (or return) the callback.
+// And when it takes a function as an argument, it typically also calls that function at the appropriate time.
+
 // NOTE -- Interview question - How to write modular code, DRY -- DO NOT REPEAT YOURSELF
 // EX - Calculate area, circumference and diameter of circle with given radius
 
