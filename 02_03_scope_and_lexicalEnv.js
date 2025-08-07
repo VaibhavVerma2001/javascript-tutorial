@@ -80,8 +80,6 @@ console.log(h); // 30 --> Changed because var is global scope
 
 // 🌑 What is Shadowing?
 // Shadowing happens when a variable in a local scope (like inside a function or block) has the same name as a variable in an outer scope.
-// The inner variable "shadows" (hides) the outer one — making the outer variable inaccessible in that inner scope.🌑 What is Shadowing?
-// Shadowing happens when a variable in a local scope (like inside a function or block) has the same name as a variable in an outer scope.
 // The inner variable "shadows" (hides) the outer one — making the outer variable inaccessible in that inner scope.
 
 // ⚠️ Illegal Shadowing (Error)
