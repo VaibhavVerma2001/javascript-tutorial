@@ -27,7 +27,7 @@ const fun2 = function () {
 // Arrow Function (Expression) - came in es6 , es2015 -  as a shorter syntax for writing functions.
 // Arrow functions are a form of function expressions:
 // Same behavior as function expression in terms of hoisting.
-// fun3(); // ReferenceError: Cannot access 'fun2' before initialization
+// fun3(); // ReferenceError: Cannot access 'fun3' before initialization
 const fun3 = () => {
   console.log("Function Expression");
 };
@@ -48,18 +48,12 @@ const fun4 = function xyz() {
   console.log("Named function expression");
 };
 fun4();
-// xyz(); // ReferenceError: xyz is not defined becuase  xyz is accessible only inside the function body (used for recursion or stack trace). It is not created in global scope
+// xyz(); // ReferenceError: xyz is not defined, becuase  xyz is accessible only inside the function body (used for recursion or stack trace). It is not created in global scope
 
 // Anonymous functions
 // Anonymous functions are typically used as values — passed to or returned from other functions.
 // Used when we want to use function like values, means assign it to somewhere
 
-// | Feature           | `var`                            | `const` / `let`            |
-// | ----------------- | -------------------------------- | -------------------------- |
-// | Scope             | Function-scoped                  | Block-scoped               |
-// | Can be redeclared | ✅ Yes                            | ❌ No (throws error)        |
-// | Can be reassigned | ✅ Yes                            | `let`: Yes, `const`: ❌ No  |
-// | Hoisting          | ✅ Yes (but value is `undefined`) | ✅ Yes (temporal dead zone) |
 
 // ************* 3. ✅ When to Use What? *************
 

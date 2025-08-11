@@ -1,15 +1,10 @@
 function createAdvancedCounter() {
-  let count = 0;
-
-  return {
-    increment: () => console.log(++count),
-    decrement: () => console.log(--count),
-    reset: () => {
-      count = 0;
-      console.log("Reset to", count);
-    },
-  };
+  console.log("outer");
+  innerHeight();
 }
 
-const counter = createAdvancedCounter();
-console.log(counter);
+createAdvancedCounter();
+
+function innerHeight() {
+  console.log("inner");
+}

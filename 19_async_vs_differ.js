@@ -1,3 +1,4 @@
+// https://chatgpt.com/share/6894d0a1-788c-8012-9d80-200a7575d624
 // In HTML, the async and defer attributes are used with <script> tags to control when and how external JavaScript files are loaded and executed. This helps improve page load performance and avoid blocking rendering.
 
 // 🧠 1 - The Problem They Solve
@@ -23,6 +24,22 @@
 // Both async and defer work only with external scripts (src must be present).
 // If you use inline script, these attributes have no effect.
 // In modern development, defer is commonly used for app scripts (e.g., React/Next.js bundles).
+
+// 1. Fetching (Downloading)
+// This is when the browser requests the .js file from the server and downloads it.
+// Happens over the network.
+// In both async and defer, fetching happens in parallel with HTML parsing, so the page doesn’t freeze while downloading.
+// 2. Executing (Running)
+// After fetching, the browser parses and runs the JS code.
+// Execution can pause HTML parsing, depending on the attribute.
+
+// Visual Timeline
+// Without attributes:
+// [Parse HTML] --stop--> [Fetch JS] --> [Execute JS] --> resume parsing
+// With async:
+// [Parse HTML + Fetch JS in parallel] --> when JS finishes downloading → stop parsing → execute JS → resume parsing
+// With defer:
+// [Parse HTML + Fetch JS in parallel] --> finish parsing HTML → execute JS
 
 // | Attribute | Load        | Execute               | Order Preserved? | Blocks HTML? | Use When...                                               |
 // | --------- | ----------- | --------------------- | ---------------- | ------------ | --------------------------------------------------------- |

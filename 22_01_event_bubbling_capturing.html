@@ -1,0 +1,139 @@
+<!-- 1. What Are Bubbling and Capturing?
+When an event (like click) happens on an element inside another element, two phases can occur before the event reaches its final target:
+Event Capturing (Trickling Phase)
+The event is first captured at the top (window → document → html → body → ...)
+Then it travels downwards towards the target element.
+Event Bubbling
+After the target element’s event is handled, the event bubbles up from target → parent → grandparent → ... until it reaches the top.
+
+2. Visual Flow
+Capturing phase:
+document → html → body → div → button
+Target phase:
+button (actual clicked element)
+Bubbling phase:
+button → div → body → html → document -->
+
+<!-- Key Notes
+Bubbling is default (useCapture = false).
+Capturing requires setting addEventListener(type, listener, true).
+You can stop the event in either phase using: -->
+
+<!-- Event bubbling -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 100px;
+    "
+  >
+    <div
+      id="grand-parent"
+      style="
+        width: 500px;
+        height: 500px;
+        background-color: antiquewhite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      "
+    >
+      Grand Parent
+
+      <div
+        id="parent"
+        style="
+          width: 300px;
+          height: 300px;
+          background-color: rgb(248, 213, 166);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        "
+      >
+        Parent
+
+        <button
+          id="child"
+          style="
+            width: 100px;
+            height: 100px;
+            background-color: rgb(247, 248, 166);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+          "
+        >
+          Child
+        </button>
+      </div>
+    </div>
+  </body>
+  <script>
+    const grandparent = document.getElementById("grand-parent");
+    const parent = document.getElementById("parent");
+    const child = document.getElementById("child");
+
+    // 1-  Event Bubbling
+    // Output -
+    // Child clicked
+    // Parent clicked
+    // Grand Parent clicked
+    child.addEventListener("click", (e) => {
+      console.log("Child clicked");
+      // e.stopPropagation(); // only consoles Child clicked
+    });
+
+    parent.addEventListener("click", (e) => {
+      console.log("Parent clicked");
+      // e.stopPropagation(); // only consoles Child clicked and Parent Clicked
+    });
+
+    grandparent.addEventListener("click", (e) => {
+      console.log("Grand Parent clicked");
+    }); // no need of stopropogation here because it has no parent
+
+    // 2- Event Capturing
+    // Output -
+    // Grand Parent clicked
+    // Parent clicked
+    // Child clicked
+    // child.addEventListener(
+    //   "click",
+    //   (e) => {
+    //     console.log("Child clicked");
+    //   },
+    //   true
+    // ); // no need of stopropogation here because it has no child
+
+    // parent.addEventListener(
+    //   "click",
+    //   (e) => {
+    //     console.log("Parent clicked");
+    //     // e.stopPropagation(); // only consoles Grand Parent clicked and Parent clicked
+    //   },
+    //   true
+    // );
+
+    // grandparent.addEventListener(
+    //   "click",
+    //   (e) => {
+    //     console.log("Grand Parent clicked");
+    //     //   e.stopPropagation(); // only consoles Grand Parent clicked
+    //   },
+    //   true
+    // );
+  </script>
+</html>
